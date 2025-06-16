@@ -1,0 +1,22 @@
+{
+  "name": "atlarge-monitoring",
+  "version": "0.0.0",
+  "private": "true",
+  "scripts": {
+    "clean": "find . -name node_modules -o -name .turbo -o -name dist -type d -prune | xargs rm -rf"
+  },
+  "workspaces": [
+    "apps/*",
+    "apps/api/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=18.x",
+    "npm": ">=10.x"
+  },
+  "packageManager": "npm@10.8.2"
+}

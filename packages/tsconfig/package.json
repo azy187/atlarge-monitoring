@@ -1,0 +1,11 @@
+{
+  "name": "@monitoring/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "base.json"
+  ],
+  "devDependencies": {
+    "tsconfig-paths": "^4.2.0"
+  }
+}

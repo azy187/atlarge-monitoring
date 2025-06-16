@@ -1,0 +1,17 @@
+{
+  "name": "@monitoring/api-v1",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@monitoring/tsconfig": "*",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.1",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
