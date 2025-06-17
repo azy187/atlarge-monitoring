@@ -1,0 +1,33 @@
+:root {
+  font-family: "Roboto Mono", monospace;
+  font-style: normal;
+}
+
+main {
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+}
+
+h1 {
+  justify-self: center;
+  font-weight: 400;
+}
+
+section {
+  margin: 24px 200px;
+  justify-content: center;
+}
+
+section > h2 {
+  text-shadow: 1px 1px 2px pink;
+  font-weight: 450;
+}
+
+li {
+  list-style: none;
+  border: 0.1rem solid cadetblue;
+  max-width: fit-content;
+  padding: 8px;
+  margin: 4px;
+}

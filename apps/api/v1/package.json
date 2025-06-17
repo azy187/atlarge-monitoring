@@ -3,15 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "_env": "cp .env.example .env"
   },
   "devDependencies": {
     "@monitoring/tsconfig": "*",
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.1",
+    "@types/pg": "^8.15.4",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@monitoring/db": "*",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0"
   }
 }

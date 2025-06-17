@@ -4,14 +4,8 @@
 # dependencies
 **/node_modules
 
-# generated reports
-data
-
 # prettier
 **.prettierrc
-
-# e2e test specs
-tests
 
 # builds
 dist

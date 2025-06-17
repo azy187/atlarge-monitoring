@@ -1,0 +1,22 @@
+{
+  "name": "@monitoring/db",
+  "version": "0.0.0",
+  "exports": {
+    "./pool": {
+      "types": "./pool.ts",
+      "default": "./dist/pool.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@monitoring/tsconfig": "*",
+    "@types/pg": "^8.15.4",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "pg": "^8.16.0"
+  }
+}
