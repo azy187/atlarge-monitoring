@@ -19,8 +19,8 @@ import type {
   PendingReport,
 } from "@monitoring/types/TestData";
 
-import * as ANSI from "../utils/ANSI";
-import * as utils from "../utils/index";
+import * as ANSI from "./ANSI";
+import * as utils from "./index";
 
 const PENDING_TEST_REPORT_DIR = "../../tests/reports";
 const INTERNAL_PROJECT_NAMES = getInternalProjectNames();
@@ -33,7 +33,13 @@ const PARSED_TEST_REPORTS = getJSONReports();
  * The name of the project is given by the name of the subfolder containing that project's tests e.g "./playwright/tests/project_x/".
  */
 function getInternalProjectNames() {
-  const internalProjectNames = fs.readdirSync("../../tests/");
+  console.log(`parser.functions path: ${__dirname}`);
+  console.log(
+    `parser.functions tests path: ${path.join(__dirname, "../../tests/")}`
+  );
+  const internalProjectNames = fs.readdirSync(
+    path.join(__dirname, "../../tests/")
+  );
 
   return internalProjectNames;
 }
