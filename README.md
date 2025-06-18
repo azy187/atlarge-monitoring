@@ -1,6 +1,8 @@
 # atlarge.monitoring monorepo
 
-## ubuntu server prerequisites
+Setting up the ubuntu server from scratch.
+
+## 1. ubuntu server prerequisites
 
 install apps:
 
@@ -39,7 +41,7 @@ sudo service postgresql status
 sudo service nginx status
 ```
 
-## setup repo
+## 2. setup repo
 
 install pm2:
 
@@ -72,10 +74,10 @@ install playwright and chromium dependencies:
 ```sh
 cd apps/e2e
 npx playwright install --with-deps chromium
-cd ..
+cd ../../
 ```
 
-## build files
+## 3. build files
 
 check all workspaces are configured properly:
 
@@ -89,16 +91,7 @@ build files:
 npm run build:all
 ```
 
-## api
-
-start or stop the backend server using pm2:
-
-```sh
-npm run server:start
-npm run server:stop
-```
-
-## server config
+## 4. server config
 
 create the postgres database and user:
 
@@ -122,4 +115,13 @@ configure nginx reverse proxy:
 sudo ln -s /home/ubuntu/atlarge-monitoring/deploy/nginx.conf /etc/nginx/sites-enabled/myapp
 sudo nginx -t
 sudo systemctl reload nginx
+```
+
+## 5. api
+
+start or stop the backend server using pm2:
+
+```sh
+npm run server:start
+npm run server:stop
 ```

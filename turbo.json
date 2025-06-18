@@ -3,17 +3,12 @@
   "tasks": {
     "_env": {
       "inputs": ["./.env.example", "./.env"],
-      "outputs": ["./.env"],
-      "cache": false
+      "outputs": ["./.env"]
     },
     "build": {
       "dependsOn": ["^build", "^_env"],
       "outputs": ["dist/**"],
       "env": ["API_*", "POSTGRES_*"]
-    },
-    "build:web": {
-      "inputs": ["./src/**/*", "./index.html"],
-      "outputs": ["dist/**"]
     }
   },
   "globalDependencies": [
