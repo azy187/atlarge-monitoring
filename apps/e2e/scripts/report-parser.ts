@@ -23,6 +23,7 @@ async function _test_parse() {
     // insert into db
     const res = await client.query({
       text: `
+      DELETE * FROM test_history
       INSERT INTO ${process.env.POSTGRES_TEST_HISTORY_TABLE} (id, data)
       VALUES ($1, $2)
       ON CONFLICT (id) DO UPDATE SET data = EXCLUDED.data
