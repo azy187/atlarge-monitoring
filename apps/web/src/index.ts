@@ -7,7 +7,10 @@ async function testServer() {
     if (res.ok) {
       const json = await res.json();
       console.log(`Success`);
-      console.log(`Data: ${JSON.parse(json)}`);
+      const data = JSON.parse(json);
+      for (const [key, value] of Object.entries(data)) {
+        console.log(key, value);
+      }
     }
   } catch (e) {
     console.error(e);
