@@ -18,16 +18,7 @@ async function _test_parse() {
     );
     const { rows } = historicalReports;
 
-    const [testHistory] = rows.filter((obj) => obj.id === 1);
-    console.log(
-      `testHistory:\nid: ${
-        testHistory.id
-      }\ndata: ${testHistory.data.toString()}`
-    );
-    // get the latest reports parsed combined with the historical reports
-    const parsedReports = parsePendingReports(
-      testHistory.data as ParsedReport[]
-    );
+    const parsedReports = parsePendingReports(rows as ParsedReport[]);
 
     console.log(`historicalReports length: ${rows.length}`);
     console.log(`parsedReports length: ${parsedReports.length}`);
