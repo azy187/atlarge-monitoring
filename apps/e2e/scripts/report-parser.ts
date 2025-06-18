@@ -17,10 +17,10 @@ async function _test_parse() {
       `SELECT 1 FROM ${process.env.POSTGRES_TEST_HISTORY_TABLE}`
     );
     const { rows } = historicalReports;
-    const data = rows.filter(({ id }) => id === 1);
-    console.log(`data length: ${data.length}`);
+
+    console.log(`data length: ${rows.toString()}`);
     // get the latest reports parsed combined with the historical reports
-    const parsedReports = parsePendingReports(data as ParsedReport[]);
+    const parsedReports = parsePendingReports(rows as ParsedReport[]);
 
     console.log(`historicalReports length: ${rows.length}`);
     console.log(`parsedReports length: ${parsedReports.length}`);
