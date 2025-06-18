@@ -17,10 +17,12 @@ async function _test_parse() {
       `SELECT * FROM ${process.env.POSTGRES_TEST_HISTORY_TABLE}`
     );
     const { rows } = historicalReports;
+    const historicalTestData = rows.length ? rows.at(0).data : [];
+    const parsedReports = parsePendingReports(
+      historicalTestData as ParsedReport[]
+    );
 
-    const parsedReports = parsePendingReports(rows as ParsedReport[]);
-
-    console.log(`historical: ${JSON.stringify(rows)}`);
+    console.log(`historical: ${JSON.stringify(historicalTestData)}`);
     console.log(`parsedReports: ${parsedReports.length}`);
 
     // insert into db
