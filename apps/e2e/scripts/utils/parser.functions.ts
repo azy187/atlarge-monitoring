@@ -51,7 +51,6 @@ function getJSONReports() {
       const data = fs.readFileSync(reportPath);
       return JSON.parse(data.toString());
     });
-  console.log(`reports.length: ${reports.length}`);
 
   return reports as PendingReport[];
 }

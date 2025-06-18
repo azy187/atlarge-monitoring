@@ -12,7 +12,6 @@ const config: PoolConfig = {
   database: process.env.POSTGRES_DB,
 };
 
-console.log(`pool: ${JSON.stringify(config)}`);
 const pool = new Pool(config);
 
 export default pool;
