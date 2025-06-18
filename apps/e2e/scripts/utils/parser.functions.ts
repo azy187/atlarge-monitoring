@@ -48,6 +48,10 @@ function getInternalProjectNames() {
  */
 function getJSONReports() {
   console.log(`getJSONReports()`);
+  console.log(`__dirname: ${__dirname}`);
+  console.log(
+    `testReportDir: ${path.join(__dirname, PENDING_TEST_REPORT_DIR)}`
+  );
   const reports = fs
     .readdirSync(path.join(__dirname, PENDING_TEST_REPORT_DIR))
     .filter((report) => path.extname(report) === ".json")
