@@ -23,8 +23,8 @@ async function _test_parse() {
 
     // insert into db
     const res = await client.query(
-      `INSERT INTO ${process.env.POSTGRES_TEST_HISTORY_TABLE}(data) VALUES($1)`,
-      parsedReports
+      `INSERT INTO ${process.env.POSTGRES_TEST_HISTORY_TABLE} (data) VALUES ($1)`,
+      [parsedReports]
     );
 
     console.log(`res: ${res}`);
