@@ -1,15 +1,26 @@
-import { spawn } from "child_process";
+import { spawnSync } from "child_process";
+import path from "path";
 import _test_parse from "./report-parser";
 
 function main() {
-  console.log("0. starting 'test-runner.ts'");
-  console.log("1. calling 'npx playwright test'");
-
-  const testProcess = spawn("npx", ["playwright test"]);
-  testProcess.on("exit", () => {
-    console.log("2. calling _test_parse() from 'report-parser.ts'");
-    _test_parse();
+  const result = spawnSync("npx", ["playwright", "test"], {
+    stdio: "inherit",
+    cwd: path.resolve(__dirname),
+    shell: true,
   });
+
+  if (result.error) {
+    console.error("Failed to run playwright:", result.error);
+    process.exit(1);
+  }
+
+  if (result.status !== 0) {
+    console.error(`Playwright tests exited with code ${result.status}`);
+    process.exit(result.status);
+  }
+
+  console.log("Playwright tests finished successfully");
+  _test_parse();
 }
 
 main();
