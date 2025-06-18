@@ -12,17 +12,15 @@ async function _test_parse() {
   // open connection pool
   const client = await pool.connect();
   try {
-    // attempt to get reports
-    const historicalReports = await client.query(
+    // get reports
+    const { rows } = await client.query(
       `SELECT * FROM ${process.env.POSTGRES_TEST_HISTORY_TABLE}`
     );
-    const { rows } = historicalReports;
-
     const parsedReports = parsePendingReports(
       (rows.length ? rows.at(0).data : []) as ParsedReport[]
     );
     // insert into db
-    const res = await client.query({
+    await client.query({
       text: `
       INSERT INTO ${process.env.POSTGRES_TEST_HISTORY_TABLE} (id, data)
       VALUES ($1, $2)
@@ -31,10 +29,10 @@ async function _test_parse() {
       values: [1, JSON.stringify(parsedReports, null, 2)],
     });
   } catch (e) {
-    console.log("_test_parse did error");
+    console.log("Error during parse.");
     console.log(e);
   } finally {
-    console.log("_test_parse ended");
+    console.log("Parse ended.");
     client.release();
   }
 }

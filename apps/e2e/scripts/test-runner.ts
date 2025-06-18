@@ -3,6 +3,7 @@ import path from "path";
 import _test_parse from "./report-parser";
 
 function main() {
+  console.log("Attempting to run Playwright tests.");
   const result = spawnSync("npx", ["playwright", "test"], {
     stdio: "inherit",
     cwd: path.resolve(__dirname),
