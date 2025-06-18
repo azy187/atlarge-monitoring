@@ -18,11 +18,16 @@ async function _test_parse() {
     );
     const { rows } = historicalReports;
 
-    rows.forEach((obj, i) => {
-      console.log(`[${i}]: ${JSON.stringify(obj)}`);
-    });
+    const [testHistory] = rows.filter((obj) => obj.id === 1);
+    console.log(
+      `testHistory:\nid: ${
+        testHistory.id
+      }\ndata: ${testHistory.data.toString()}`
+    );
     // get the latest reports parsed combined with the historical reports
-    const parsedReports = parsePendingReports(rows as ParsedReport[]);
+    const parsedReports = parsePendingReports(
+      testHistory.data as ParsedReport[]
+    );
 
     console.log(`historicalReports length: ${rows.length}`);
     console.log(`parsedReports length: ${parsedReports.length}`);
