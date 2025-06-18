@@ -48,7 +48,6 @@ function getJSONReports() {
     .filter((report) => path.extname(report) === ".json")
     .map((filePath) => {
       const reportPath = path.join(testReportDirectory, filePath);
-      console.log(`filePath: ${reportPath}`);
       const data = fs.readFileSync(reportPath);
       return JSON.parse(data.toString());
     });

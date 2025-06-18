@@ -20,8 +20,8 @@ async function _test_parse() {
 
     const parsedReports = parsePendingReports(rows as ParsedReport[]);
 
-    console.log(`historicalReports length: ${rows.length}`);
-    console.log(`parsedReports length: ${parsedReports.length}`);
+    console.log(`historical: ${JSON.stringify(rows)}`);
+    console.log(`parsedReports: ${parsedReports.length}`);
 
     // insert into db
     const res = await client.query({
