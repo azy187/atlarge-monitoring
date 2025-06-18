@@ -7,3 +7,5 @@ function main() {
   console.log(`result.output:\n${result.status}`);
   console.log(`result.status:\n${result.output}`);
 }
+
+main();
