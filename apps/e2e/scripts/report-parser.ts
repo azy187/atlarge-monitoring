@@ -20,6 +20,10 @@ async function _test_parse() {
 
     // get the latest reports parsed combined with the historical reports
     const parsedReports = parsePendingReports(rows as ParsedReport[]);
+
+    console.log(`historicalReports length: ${rows.length}`);
+    console.log(`parsedReports length: ${parsedReports.length}`);
+
     // insert into db
     const res = await client.query({
       text: `
