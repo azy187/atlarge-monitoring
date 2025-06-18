@@ -20,33 +20,29 @@ import type { ParsedReport } from "@monitoring/types/TestData";
 
 async function fetchReports() {
   console.log("fetchReports()");
-  const reports = [];
   try {
     const res = await fetch("/api/v1/data");
     if (res.ok) {
-      const json: Awaited<Readonly<{ id: number; data: ParsedReport[] }>> =
-        await res.json();
+      const json = await res.json();
 
-      reports.push(json);
+      return JSON.parse(json);
     } else {
       console.log("Failed to fetch.");
     }
   } catch (e) {
     console.log(e);
   }
-
-  return [...reports] as const;
 }
 
 async function init() {
   const reports = await fetchReports();
-  if (reports.length !== 1) return;
-  const { data } = reports[0];
+  if (reports) return;
+  const { data } = reports;
   const [main] = document.getElementsByTagName("main");
   const fragment = document.createDocumentFragment();
   // fragment.appendChild(document.createElement("section")).appendChild(document.createElement("ul"));
 
-  for (const report of data) {
+  for (const report of data as ParsedReport[]) {
     const header = document.createElement("h2");
     const section = document.createElement("section");
     const list = document.createElement("ul");
