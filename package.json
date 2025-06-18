@@ -9,6 +9,7 @@
     "docker:nuke": "docker compose down --volumes --remove-orphans || docker-compose down --volumes --remove-orphans",
     "docker:local": "turbo run dev:deploy && cp .env.example .env && docker-compose -f docker-compose.yml up",
     "build:all": "npx turbo _env && npx turbo build",
+    "e2e:run": "ts-node apps/e2e/scripts/test-runner.ts",
     "server:start": "pm2 start ecosystem.config.js",
     "server:stop": "pm2 stop ecosystem.config.js"
   },

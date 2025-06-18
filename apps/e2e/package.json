@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@monitoring/tsconfig": "*",
+    "@monitoring/types": "*",
     "@playwright/test": "^1.53.0",
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.1",
