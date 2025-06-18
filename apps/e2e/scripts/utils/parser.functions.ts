@@ -24,7 +24,6 @@ import * as utils from "./index";
 
 const PENDING_TEST_REPORT_DIR = "../../tests/reports";
 const INTERNAL_PROJECT_NAMES = getInternalProjectNames();
-const PENDING_TEST_REPORTS = getJSONReports();
 
 /**
  * @returns a string[] containing the names of the projects that we are running tests for.
@@ -32,10 +31,6 @@ const PENDING_TEST_REPORTS = getJSONReports();
  * The name of the project is given by the name of the subfolder containing that project's tests e.g "./playwright/tests/project_x/".
  */
 function getInternalProjectNames() {
-  console.log(`parser.functions path: ${__dirname}`);
-  console.log(
-    `parser.functions tests path: ${path.join(__dirname, "../../tests/")}`
-  );
   const internalProjectNames = fs
     .readdirSync(path.join(__dirname, "../../tests/"))
     .filter((folder) => folder !== "reports" && folder !== "results");
@@ -47,11 +42,6 @@ function getInternalProjectNames() {
  * @returns Array<PendingReport | ParsedReport>
  */
 function getJSONReports() {
-  console.log(`getJSONReports()`);
-  console.log(`__dirname: ${__dirname}`);
-  console.log(
-    `testReportDir: ${path.join(__dirname, PENDING_TEST_REPORT_DIR)}`
-  );
   const reports = fs
     .readdirSync(path.join(__dirname, PENDING_TEST_REPORT_DIR))
     .filter((report) => path.extname(report) === ".json")
@@ -167,6 +157,7 @@ function parseTestSuite(suite: JSONReportSuite) {
 function parsePendingReports(historical: ParsedReport[]) {
   const parsedSuites: ParsedTestSuite[] = [];
   const internalProjects: ParsedReport[] = [];
+  const PENDING_TEST_REPORTS = getJSONReports();
 
   if (PENDING_TEST_REPORTS.length) {
     for (const report of PENDING_TEST_REPORTS) {
