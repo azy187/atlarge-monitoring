@@ -7,8 +7,8 @@ import { ParsedReport } from "@monitoring/types/TestData";
 
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
+// needs major refactoring
 async function _test_parse() {
-  console.log("3. _test_parse called");
   // open connection pool
   const client = await pool.connect();
   try {
@@ -17,14 +17,10 @@ async function _test_parse() {
       `SELECT * FROM ${process.env.POSTGRES_TEST_HISTORY_TABLE}`
     );
     const { rows } = historicalReports;
-    const historicalTestData = rows.length ? rows.at(0).data : [];
+
     const parsedReports = parsePendingReports(
-      historicalTestData as ParsedReport[]
+      (rows.length ? rows.at(0).data : []) as ParsedReport[]
     );
-
-    console.log(`historical: ${JSON.stringify(historicalTestData)}`);
-    console.log(`parsedReports: ${parsedReports.length}`);
-
     // insert into db
     const res = await client.query({
       text: `
@@ -34,8 +30,6 @@ async function _test_parse() {
       `,
       values: [1, JSON.stringify(parsedReports, null, 2)],
     });
-
-    console.log(`res: ${res}`);
   } catch (e) {
     console.log("_test_parse did error");
     console.log(e);
