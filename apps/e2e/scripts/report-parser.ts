@@ -1,0 +1,40 @@
+import fs from "fs";
+import path from "path";
+import { parsePendingReports } from "./utils/parser.functions";
+import pool from "@monitoring/db/pool";
+import dotenv from "dotenv";
+import { ParsedReport } from "@monitoring/types/TestData";
+
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
+
+async function _test_parse() {
+  console.log("3. _test_parse called");
+  // open connection pool
+  const client = await pool.connect();
+  try {
+    // attempt to get reports
+    const historicalReports = await client.query(
+      `SELECT * FROM ${process.env.POSTGRES_TEST_HISTORY_TABLE}`
+    );
+    const { rows } = historicalReports;
+
+    // get the latest reports parsed combined with the historical reports
+    const parsedReports = parsePendingReports(rows as ParsedReport[]);
+
+    // insert into db
+    const res = await client.query(
+      `INSERT INTO ${process.env.POSTGRES_TEST_HISTORY_TABLE}(data) VALUES($1)`,
+      parsedReports
+    );
+
+    console.log(`res: ${res}`);
+  } catch (e) {
+    console.log("_test_parse did error");
+    console.log(e);
+  } finally {
+    console.log("_test_parse ended");
+    client.release();
+  }
+}
+
+export default _test_parse;

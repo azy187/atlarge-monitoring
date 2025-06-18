@@ -10,5 +10,9 @@
 # builds
 dist
 
+# playwright reports/results
+**/tests/reports
+**/tests/results
+
 # turbo
 .turbo
