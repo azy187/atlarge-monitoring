@@ -25,7 +25,7 @@ async function fetchReports() {
     if (res.ok) {
       const json = await res.json();
 
-      return JSON.parse(json);
+      return json;
     } else {
       console.log("Failed to fetch.");
     }
@@ -36,7 +36,8 @@ async function fetchReports() {
 
 async function init() {
   const reports = await fetchReports();
-  if (reports) return;
+  console.log(reports);
+  if (true) return;
   const { data } = reports;
   const [main] = document.getElementsByTagName("main");
   const fragment = document.createDocumentFragment();
