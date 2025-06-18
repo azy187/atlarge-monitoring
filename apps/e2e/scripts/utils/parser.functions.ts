@@ -25,7 +25,6 @@ import * as utils from "./index";
 const PENDING_TEST_REPORT_DIR = "../../tests/reports";
 const INTERNAL_PROJECT_NAMES = getInternalProjectNames();
 const PENDING_TEST_REPORTS = getJSONReports();
-const PARSED_TEST_REPORTS = getJSONReports();
 
 /**
  * @returns a string[] containing the names of the projects that we are running tests for.
@@ -44,24 +43,20 @@ function getInternalProjectNames() {
   return internalProjectNames;
 }
 
-const enum REPORT_TYPE {
-  PENDING,
-  PARSED,
-}
-
 /**
  * @returns Array<PendingReport | ParsedReport>
  */
 function getJSONReports() {
+  console.log(`getJSONReports()`);
   const reports = fs
     .readdirSync(path.join(__dirname, PENDING_TEST_REPORT_DIR))
     .filter((report) => path.extname(report) === ".json")
     .map((filePath) => {
-      const data = fs.readFileSync(
-        path.join(__dirname, `${PENDING_TEST_REPORT_DIR}/${filePath}`)
-      );
+      console.log(`filePath: ${filePath}`);
+      const data = fs.readFileSync(filePath);
       return JSON.parse(data.toString());
     });
+  console.log(`reports.length: ${reports.length}`);
 
   return reports as PendingReport[];
 }
