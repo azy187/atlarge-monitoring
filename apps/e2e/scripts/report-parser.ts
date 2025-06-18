@@ -18,7 +18,9 @@ async function _test_parse() {
     );
     const { rows } = historicalReports;
 
-    console.log(`data length: ${rows.toString()}`);
+    rows.forEach((obj, i) => {
+      console.log(`[${i}]: ${JSON.stringify(obj)}`);
+    });
     // get the latest reports parsed combined with the historical reports
     const parsedReports = parsePendingReports(rows as ParsedReport[]);
 
