@@ -1,10 +1,17 @@
 import { Response, Request } from "express";
+import dotenv from "dotenv";
 import pool from "@monitoring/db/pool";
+import path from "path";
+
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const getData = async (req: Request, res: Response) => {
   const client = await pool.connect();
+  console.log(`SELECT * FROM ${process.env.POSTGRES_TEST_HISTORY_TABLE}`);
   try {
-    const response = await client.query("SELECT * FROM test_history");
+    const response = await client.query(
+      `SELECT * FROM ${process.env.POSTGRES_TEST_HISTORY_TABLE}`
+    );
     const { rows } = response;
     res.json(rows);
   } catch (e) {

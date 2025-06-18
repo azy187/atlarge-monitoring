@@ -7,19 +7,13 @@
       "cache": false
     },
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "^_env"],
       "outputs": ["dist/**"],
       "env": ["API_*", "POSTGRES_*"]
     },
     "build:web": {
       "inputs": ["./src/**/*", "./index.html"],
       "outputs": ["dist/**"]
-    },
-    "start:api": {
-      "inputs": [".env*"],
-      "dependsOn": ["_env", "^build", "^start:api"],
-      "env": ["API_*", "POSTGRES_*"],
-      "cache": false
     }
   },
   "globalDependencies": [

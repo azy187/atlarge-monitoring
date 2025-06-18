@@ -7,7 +7,10 @@
     "clean:dist": "find ./apps -name dist -type d -prune | xargs rm -rf",
     "_env": "cp .env.example .env",
     "docker:nuke": "docker compose down --volumes --remove-orphans || docker-compose down --volumes --remove-orphans",
-    "docker:local": "turbo run dev:deploy && cp .env.example .env && docker-compose -f docker-compose.yml up"
+    "docker:local": "turbo run dev:deploy && cp .env.example .env && docker-compose -f docker-compose.yml up",
+    "build:all": "npx turbo _env && npx turbo build && npx turbo build:web",
+    "server:start": "pm2 start ecosystem.config.js",
+    "server:stop": "pm2 stop ecosystem.config.js"
   },
   "workspaces": [
     "apps/*",
@@ -15,6 +18,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "ts-node": "^10.9.2",
     "turbo": "^2.5.4",
     "typescript": "^5.8.3"
   },

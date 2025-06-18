@@ -1,6 +1,51 @@
 # atlarge.monitoring monorepo
 
+## ubuntu server prerequisites
+
+install apps:
+
+```sh
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl gnupg build-essential -y
+```
+
+install node:
+
+```sh
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+
+install and start postgres:
+
+```sh
+sudo apt install postgresql postgresql-contrib -y
+sudo systemctl enable postgresql
+sudo systemctl start postgresql
+```
+
+install and start nginx:
+
+```sh
+sudo apt install nginx -y
+sudo systemctl enable nginx
+sudo systemctl start nginx
+```
+
+check everything installed and is running:
+
+```sh
+sudo service postgresql status
+sudo service nginx status
+```
+
 ## setup repo
+
+install pm2:
+
+```sh
+sudo npm install pm2 -g
+```
 
 clone the repo:
 
@@ -26,66 +71,49 @@ install playwright and chromium dependencies:
 
 ```sh
 cd apps/e2e
-npx install playwright chromium
+npx playwright install --with-deps chromium
+cd ..
 ```
+
+## build files
 
 check all workspaces are configured properly:
 
 ```sh
-turbo ls
+npx turbo ls
 ```
 
-build the static files:
+build files:
 
 ```sh
-turbo build:web
+npm run build:all
 ```
 
-build packages and start the api server:
+## api
+
+start or stop the backend server using pm2:
 
 ```sh
-turbo start:api
+npm run server:start
+npm run server:stop
 ```
 
-## setup server
+## server config
 
-cd to the home directory.
-
-install prerequisites:
+create the postgres database and user:
 
 ```sh
-sudo apt update && sudo apt upgrade -y
-sudo apt install curl gnupg build-essential -y
-```
-
-install node:
-
-```sh
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt install -y nodejs
-```
-
-install and start postgres:
-
-```sh
-sudo apt install postgresql postgresql-contrib -y
-sudo systemctl enable postgresql
-sudo systemctl start postgresql
-```
-
-setup user, database, table:
-
-```sh
-sudo -u postgres psql -f atlarge-monitoring/deploy/init_db.sql
+sudo cp ./atlarge-monitoring/deploy/init_db_and_user.sql /tmp/
+sudo -u postgres psql -f /tmp/init_db_and_user.sql
 
 ```
 
-install and start nginx:
+create the table for the test_history data:
 
 ```sh
-sudo apt install nginx -y
-sudo systemctl enable nginx
-sudo systemctl start nginx
+sudo cp ./atlarge-monitoring/deploy/init_schema.sql /tmp/
+sudo -u postgres psql -d database -f /tmp/init_db_and_user.sql
+
 ```
 
 configure nginx reverse proxy:
