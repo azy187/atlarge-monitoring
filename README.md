@@ -34,20 +34,21 @@ sudo systemctl enable nginx
 sudo systemctl start nginx
 ```
 
-check everything installed and is running:
-
-```sh
-sudo service postgresql status
-sudo service nginx status
-```
-
-## 2. setup repo
-
 install pm2:
 
 ```sh
 sudo npm install pm2 -g
 ```
+
+check everything installed and is running:
+
+```sh
+sudo service postgresql status
+sudo service nginx status
+pm2 --version
+```
+
+## 2. setup repo
 
 clone the repo:
 
@@ -105,14 +106,15 @@ create the table for the test_history data:
 
 ```sh
 sudo cp ./atlarge-monitoring/deploy/init_schema.sql /tmp/
-sudo -u postgres psql -d database -f /tmp/init_db_and_user.sql
+sudo -u postgres psql -d database -f /tmp/init_schema.sql
 
 ```
 
 configure nginx reverse proxy:
 
 ```sh
-sudo ln -s /home/ubuntu/atlarge-monitoring/deploy/nginx.conf /etc/nginx/sites-enabled/myapp
+sudo cp ./atlarge-monitoring/deploy/nginx.conf /etc/nginx/sites-available/myapp
+sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
