@@ -25,7 +25,7 @@ async function fetchReports() {
     if (res.ok) {
       const json = await res.json();
 
-      return json;
+      return json[0]["data"] as ParsedReport[];
     } else {
       console.log("Failed to fetch.");
     }
@@ -36,14 +36,12 @@ async function fetchReports() {
 
 async function init() {
   const reports = await fetchReports();
-  console.log(reports);
-  if (true) return;
-  const { data } = reports;
+  if (typeof reports === "undefined") return;
   const [main] = document.getElementsByTagName("main");
   const fragment = document.createDocumentFragment();
   // fragment.appendChild(document.createElement("section")).appendChild(document.createElement("ul"));
 
-  for (const report of data as ParsedReport[]) {
+  for (const report of reports) {
     const header = document.createElement("h2");
     const section = document.createElement("section");
     const list = document.createElement("ul");
