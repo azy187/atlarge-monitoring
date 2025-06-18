@@ -14,7 +14,7 @@ async function _test_parse() {
   try {
     // attempt to get reports
     const historicalReports = await client.query(
-      `SELECT 1 FROM ${process.env.POSTGRES_TEST_HISTORY_TABLE}`
+      `SELECT * FROM ${process.env.POSTGRES_TEST_HISTORY_TABLE}`
     );
     const { rows } = historicalReports;
 
