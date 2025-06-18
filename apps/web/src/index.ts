@@ -7,7 +7,7 @@ async function testServer() {
     if (res.ok) {
       const json = await res.json();
       console.log(`Success`);
-      console.log(`Data: ${json}`);
+      console.log(`Data: ${JSON.parse(json)}`);
     }
   } catch (e) {
     console.error(e);
