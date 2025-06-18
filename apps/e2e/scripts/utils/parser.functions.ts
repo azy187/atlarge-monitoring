@@ -42,12 +42,14 @@ function getInternalProjectNames() {
  * @returns Array<PendingReport | ParsedReport>
  */
 function getJSONReports() {
+  const testReportDirectory = path.join(__dirname, PENDING_TEST_REPORT_DIR);
   const reports = fs
-    .readdirSync(path.join(__dirname, PENDING_TEST_REPORT_DIR))
+    .readdirSync(testReportDirectory)
     .filter((report) => path.extname(report) === ".json")
     .map((filePath) => {
-      console.log(`filePath: ${filePath}`);
-      const data = fs.readFileSync(filePath);
+      const reportPath = path.join(testReportDirectory, filePath);
+      console.log(`filePath: ${reportPath}`);
+      const data = fs.readFileSync(reportPath);
       return JSON.parse(data.toString());
     });
   console.log(`reports.length: ${reports.length}`);
