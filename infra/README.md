@@ -1,3 +1,3 @@
 ## Infrastructure
 
-Project docker files & configs.
+WIP project docker files.

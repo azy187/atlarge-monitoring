@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "tsc"
+    "build:web": "tsc"
   },
   "devDependencies": {
     "@monitoring/tsconfig": "*",
+    "@monitoring/types": "*",
     "@playwright/test": "^1.53.0",
     "@types/node": "^24.0.1",
     "typescript": "^5.8.3"

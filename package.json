@@ -4,8 +4,10 @@
   "private": "true",
   "scripts": {
     "clean": "find . -name node_modules -o -name .turbo -o -name dist -type d -prune | xargs rm -rf",
-    "dev:nuke": "docker compose down --volumes --remove-orphans || docker-compose down --volumes --remove-orphans",
-    "dev:local": "turbo run dev:deploy && cp .env.example .env && docker-compose -f docker-compose.yml up"
+    "clean:dist": "find ./apps -name dist -type d -prune | xargs rm -rf",
+    "_env": "cp .env.example .env",
+    "docker:nuke": "docker compose down --volumes --remove-orphans || docker-compose down --volumes --remove-orphans",
+    "docker:local": "turbo run dev:deploy && cp .env.example .env && docker-compose -f docker-compose.yml up"
   },
   "workspaces": [
     "apps/*",

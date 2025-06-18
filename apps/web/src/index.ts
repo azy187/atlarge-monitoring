@@ -1,3 +1,5 @@
+import type { PendingReport } from "@monitoring/types/TestData";
+
 async function testServer() {
   try {
     const res = await fetch("/api/v1/data");

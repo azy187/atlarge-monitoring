@@ -1,22 +1,25 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "tasks": {
-    "build": {
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"],
-      "env": ["API_*", "POSTGRES_*"]
-    },
     "_env": {
       "inputs": ["./.env.example", "./.env"],
       "outputs": ["./.env"],
       "cache": false
     },
-    "dev:deploy": {
-      "dependsOn": ["_env"]
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"],
+      "env": ["API_*", "POSTGRES_*"]
     },
-    "deploy": {
-      "dependsOn": ["^build"]
+    "build:web": {
+      "inputs": ["./src/**/*", "./index.html"],
+      "outputs": ["dist/**"]
+    },
+    "start:api": {
+      "inputs": [".env*"],
+      "dependsOn": ["_env", "^build", "^start:api"],
+      "env": ["API_*", "POSTGRES_*"],
+      "cache": false
     }
   },
   "globalDependencies": [

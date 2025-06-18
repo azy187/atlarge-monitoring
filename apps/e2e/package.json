@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "tsc",
-    "e2e:test": "npx playwright test",
+    "e2e:test": "ts-node scripts/test-runner.ts",
     "_env": "cp .env.example .env"
   },
   "devDependencies": {
@@ -13,11 +12,11 @@
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.1",
     "@types/pg": "^8.15.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "@monitoring/db": "*",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0"
+    "dotenv": "^16.5.0"
   }
 }
