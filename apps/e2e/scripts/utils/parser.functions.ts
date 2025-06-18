@@ -37,9 +37,9 @@ function getInternalProjectNames() {
   console.log(
     `parser.functions tests path: ${path.join(__dirname, "../../tests/")}`
   );
-  const internalProjectNames = fs.readdirSync(
-    path.join(__dirname, "../../tests/")
-  );
+  const internalProjectNames = fs
+    .readdirSync(path.join(__dirname, "../../tests/"))
+    .filter((folder) => folder !== "reports" && folder !== "results");
 
   return internalProjectNames;
 }

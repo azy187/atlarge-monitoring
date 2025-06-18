@@ -20,12 +20,15 @@ async function _test_parse() {
 
     // get the latest reports parsed combined with the historical reports
     const parsedReports = parsePendingReports(rows as ParsedReport[]);
-
     // insert into db
-    const res = await client.query(
-      `INSERT INTO ${process.env.POSTGRES_TEST_HISTORY_TABLE} (data) VALUES ($1)`,
-      [JSON.stringify(parsedReports, null, 2)]
-    );
+    const res = await client.query({
+      text: `
+      INSERT INTO ${process.env.POSTGRES_TEST_HISTORY_TABLE} (id, data)
+      VALUES ($1, $2)
+      ON CONFLICT (id) DO UPDATE SET data = EXCLUDED.data
+      `,
+      values: [1, JSON.stringify(parsedReports, null, 2)],
+    });
 
     console.log(`res: ${res}`);
   } catch (e) {
